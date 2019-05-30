@@ -1,0 +1,53 @@
+{
+  "name": "figma-render",
+  "version": "0.1.0",
+  "main": "lib/cjs/index.js",
+  "typings": "lib/esm/index.d.ts",
+  "module": "lib/esm/index.js",
+  "repository": "https://github.com/Idered/figma-renderer.git",
+  "author": "Kasper Mikiewicz <iam@kasper.io>",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "rm -rf ./packages/*/lib",
+    "build": "yarn build:cjs && yarn build:esm",
+    "build:cjs": "yarn module:cjs && tsc --build",
+    "build:esm": "yarn module:esm && tsc --build",
+    "dev:cjs": "yarn build:cjs --watch",
+    "dev:esm": "yarn build:esm --watch",
+    "module:cjs": "sed -i -e '0,/target/{s:esnext:es5:}' -e '0,/module/{s:esnext:commonjs:}' -e s:lib/esm:lib/cjs: ./tsconfig.json",
+    "module:esm": "sed -i -e s:es5:esnext: -e s:commonjs:esnext: -e s:lib/cjs:lib/esm: ./tsconfig.json",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addons": "^5.0.11",
+    "@storybook/react": "^5.0.11",
+    "@types/react": "^16.8.19",
+    "@typescript-eslint/eslint-plugin": "^1.5.0",
+    "@typescript-eslint/parser": "^1.5.0",
+    "babel-eslint": "9.x",
+    "babel-loader": "^8.0.6",
+    "eslint": "5.16.0",
+    "eslint-config-react-app": "^4.0.1",
+    "eslint-plugin-flowtype": "2.x",
+    "eslint-plugin-import": "2.x",
+    "eslint-plugin-jsx-a11y": "6.x",
+    "eslint-plugin-react": "7.x",
+    "eslint-plugin-react-hooks": "1.5.0",
+    "figma-types": "^0.1.6",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "typescript": "^3.5.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "dependencies": {
+    "konva": "^3.3.0",
+    "react-konva": "^16.8.7-2"
+  }
+}

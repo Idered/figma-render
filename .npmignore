@@ -1,0 +1,7 @@
+.vscode
+.storybook
+.sonarlint
+src
+stories
+.editorconfig
+tsconfig.json
